@@ -1,1 +1,3 @@
-pip install python-magic
+```
+$ pip install -r requirements.txt
+```
