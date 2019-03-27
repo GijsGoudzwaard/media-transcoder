@@ -1,12 +1,35 @@
 import os
+import sys
 import magic
 import subprocess
 from tqdm import tqdm
 
+def getArg(search, fallback = None):
+    args = sys.argv[1:]
+    found_arg = False
+
+    for arg in args:
+        arg = arg.replace('--', '')
+
+        arg, value = arg.split('=')
+
+        if arg == search:
+            found_arg = value
+            break
+
+    if not found_arg and fallback is not None:
+        return fallback
+    elif not found_arg and fallback is None:
+        sys.exit('\'%s\' is required' % search)
+
+    return found_arg
 
 ffprobe = "ffprobe -v quiet -select_streams v:0 -show_entries stream=codec_name -of default=noprint_wrappers=1:nokey=1 "
 
-DIR = './../../Thor/Media'
+DIR = getArg('path')
+
+if (DIR == None):
+    sys.exit('Path is required.')
 
 mime = magic.Magic(mime=True)
 
@@ -44,7 +67,7 @@ def getNonH264Files():
 
   return non_h264
 
-print("Fetching to be transcoded files...")
+print("Fetching to be transcoded files, this could take a while depending on how large your library is...")
 non_h264 = getNonH264Files()
 
 print("Non h264 files: %d" % len(non_h264))
