@@ -18,9 +18,9 @@ All available options are specified below. Of all these options, only `path` is 
 
 ```
 python index.py
-        --path (required)
-            Location which will be searched for video's and transcoded if they are found.
+    --path (required)
+        Location which will be searched for video's and transcoded if they are found.
 
-        --threads
-            How many CPU cores you'd like to use for transcoding. Default is 1.
+    --threads
+        How many CPU cores you'd like to use for transcoding. Default is 1.
 ```
