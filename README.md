@@ -2,7 +2,7 @@
 
 Transcode all video files within a directory for 'direct play'. This script will search for all video files within a directory and check its codec. If the codec is not h264, then it will be transcoded to h264.
 
-This is especially usefull for a raspberry pi media server where all media from 1080p and up needs to be transcoded for direct play. This script does not copy any subtitles.
+This is especially useful for a raspberry pi media server, where all media from 1080p and up needs to be transcoded in order to be watched properly. This script does not copy any subtitles.
 
 ## Setup
 
