@@ -5,6 +5,12 @@ import subprocess
 from tqdm import tqdm
 
 
+# Command that will transcode the video file to a 'direct play' format.
+transcode = 'ffmpeg -i "%s" -loglevel quiet -map 0:a -map 0:v -c:v libx264 -preset ultrafast -crf 23 -tune film -b:v 8M -maxrate:v 8M -bufsize:v 8M -c:a aac -ac 2 -ab 256K -threads %d "%s" -y'
+
+# Command that will return the codec of a video file.
+ffprobe = "ffprobe -v quiet -select_streams v:0 -show_entries stream=codec_name -of default=noprint_wrappers=1:nokey=1 "
+
 def getArg(search, fallback=None):
     """Retrieve an argument. If the argument doesn't exist, return the
     fallback. If the fallback doesn't exist and the argument doesn't
@@ -35,10 +41,6 @@ def getArg(search, fallback=None):
 
     return found_arg
 
-
-# Command that will return the codec of a video file.
-ffprobe = "ffprobe -v quiet -select_streams v:0 -show_entries stream=codec_name -of default=noprint_wrappers=1:nokey=1 "
-
 # The directory where video files will be searched and transcoded.
 DIR = getArg('path')
 
@@ -48,7 +50,6 @@ if (DIR == None):
     sys.exit('Path is required.')
 
 mime = magic.Magic(mime=True)
-
 
 def isVideo(file):
     """Check if the given file is a video or not.
@@ -105,16 +106,15 @@ def getNonH264Files():
     return non_h264
 
 print("Fetching to be transcoded files, this could take a while depending on how large your library is...")
+
 non_h264 = getNonH264Files()
-
-print("Non h264 files: %d" % len(non_h264))
-
-# Command that will transcode the video file to a 'direct play' format.
-transcode = 'ffmpeg -i "%s" -loglevel quiet -map 0:a -map 0:v -c:v libx264 -preset ultrafast -crf 23 -tune film -b:v 8M -maxrate:v 8M -bufsize:v 8M -c:a aac -ac 2 -ab 256K -threads %d "%s" -y'
-
-print('Transcoding...')
-
 total_nonh264 = len(non_h264)
+
+print("Non h264 files: %d" % total_nonh264)
+
+if (total_nonh264 is not 0):
+    print('Transcoding...')
+
 i = 0
 
 for path in non_h264:
