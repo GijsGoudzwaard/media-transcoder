@@ -99,8 +99,8 @@ def getNonH264Files():
                     process = subprocess.Popen('%s "%s"' % (ffprobe, path), shell=True, stdout=subprocess.PIPE)
                     output, error = process.communicate()
 
-                if not 'h264' in output.decode("utf-8"):
-                    non_h264.append(path)
+                    if not 'h264' in output.decode("utf-8"):
+                        non_h264.append(path)
 
     return non_h264
 
