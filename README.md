@@ -23,7 +23,7 @@ pip install -r requirements.txt
 All available options are specified below. Of all these options, only `path` is **required**.
 
 ```text
-usage: python index.py --path=PATH [--output=OUTPUT] [--override=False] [--threads=1]
+usage: python index.py --path=PATH [--override=False] [--threads=1]
 
 Arguments
     --path (required)
