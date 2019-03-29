@@ -126,7 +126,6 @@ for path in non_h264:
     input_dir = '/'.join(splitted_path[:-1])
 
     file_name = '.'.join(os.path.basename(path).split('.')[:-1])
-    file_name = getArg('output', file_name)
 
     command = transcode % (path, int(getArg('threads', 1)), ('%s/%s.mp4' % (input_dir, file_name)))
     transcoding = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)

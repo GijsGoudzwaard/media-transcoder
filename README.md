@@ -6,6 +6,12 @@ This is especially useful for a raspberry pi media server, where all media from 
 
 ## Setup
 
+This script relies heavily on `ffmpeg` and `ffprobe`. Make sure that you have this installed, if not run
+
+```bash
+sudo apt install ffmpeg
+```
+
 Both python 2 and python 3 are supported.
 
 ```bash
@@ -22,11 +28,6 @@ usage: python index.py --path=PATH [--output=OUTPUT] [--override=False] [--threa
 Arguments
     --path (required)
         Location which will be searched for video's and transcoded if they are found.
-
-    --output
-        The name of the transcoded file. The file will be placed in the same
-        directory as the original file. Also the file will be forced to .mp4.
-        Default is the name of the original file.
 
     --overwrite
         Overwrite the original file with the newly transcoded file. Default is False.
