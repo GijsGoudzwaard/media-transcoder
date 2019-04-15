@@ -115,7 +115,7 @@ print("Non h264 files: %d" % total_nonh264)
 if (total_nonh264 is not 0):
     print('Transcoding...')
 
-i = 0
+i = 1
 
 for path in non_h264:
     print('[Transcoding %d/%d] - %s' % (i, total_nonh264, path))
